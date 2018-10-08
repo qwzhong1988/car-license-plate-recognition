@@ -26,6 +26,7 @@ for file in ['__pycache__', '.git']:
     try:fileList.remove(file)
     except:pass
 print(fileList)
+# update file
 git_update(fileList)
 
 
