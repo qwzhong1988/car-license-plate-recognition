@@ -21,12 +21,12 @@ def git_update(fileList, commit_msg='update for project'):
         subprocess.check_call(['git', 'push', 'origin', 'master'])
 
 # 获取需要上传的文件
-file_collection = os.listdir(local_repo_dir)
+fileList = os.listdir(local_repo_dir)
 for file in ['__pycache__', '.git']:
-    try:file_collection.remove(file)
+    try:fileList.remove(file)
     except:pass
-print(file_collection)
-git_update(['genplate.py'])
+print(fileList)
+git_update(fileList)
 
 
 
