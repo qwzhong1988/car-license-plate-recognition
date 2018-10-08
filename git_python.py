@@ -13,6 +13,7 @@ def creat_repo(git_repo_url):
 
 def git_update(fileList, commit_msg='update for project'):
     # git update
+    # subprocess.call(['git reset --hard FETCH_HEAD'])
     subprocess.call(['git', 'pull', 'origin', 'master'])
     subprocess.call(['git', 'add', '-u'])
     for file in fileList:
