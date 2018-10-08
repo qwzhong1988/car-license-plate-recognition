@@ -14,7 +14,7 @@ def creat_repo(git_repo_url):
 def git_update(fileList, commit_msg='update for project'):
     # git update
     subprocess.check_call(['git', 'pull', 'origin', 'master'])
-    subprocess.check_call(['git', 'add', 'origin', 'master'])
+    subprocess.check_call(['git', 'add', '-u'])
     for file in fileList:
         subprocess.check_call(['git', 'add', file])
         subprocess.check_call(['git', 'commit', '-m', commit_msg])
