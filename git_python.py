@@ -30,4 +30,4 @@ if __name__ == '__main__':
         except:pass
     print(fileList)
     # update file
-    git_update(fileList)
+    git_update(['plate'])
