@@ -13,14 +13,13 @@ def creat_repo(git_repo_url):
 
 def git_update(fileList, commit_msg='update for project'):
     # git update
-    # subprocess.call(['git reset --hard FETCH_HEAD'])
-    subprocess.call(['git', 'pull', 'origin', 'master'])
+    subprocess.call(['git', 'reset'])
+    # subprocess.call(['git', 'pull', 'origin', 'master'])
     subprocess.call(['git', 'add', '-u'])
-    for file in fileList:
-        subprocess.call(['git', 'add', file])
-        subprocess.call(['git', 'commit', '-m', commit_msg])
-        subprocess.call(['git', 'push', 'origin', 'master'])
-        print('{} is updated'.format(file))
+    # git add files
+    subprocess.call(['git', 'add', ' '.join(fileList)])
+    subprocess.call(['git', 'commit', '-m', commit_msg])
+    subprocess.call(['git', 'push', 'origin', 'master'])
 
 # 获取需要上传的文件
 fileList = os.listdir(local_repo_dir)
