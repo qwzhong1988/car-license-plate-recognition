@@ -38,7 +38,7 @@ local_repo_dir = r'C:\jupyter\car_palte_recogonition'
 git_repo_url = r'https://github.com/liam800/car-license-plate-recognition'
 
 repo = git_repo(local_repo_dir, git_repo_url)
-# repo.add_file(['git_python.py'], commit_msg='update files for project')
+repo.add_file(['git_python.py'], commit_msg='update files for project')
 # repo.update_modified('update modification for this file')
 
 
