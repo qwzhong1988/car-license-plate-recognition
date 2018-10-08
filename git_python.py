@@ -1,54 +1,31 @@
-import git
 import os
+import subprocess
 
-class git_repo(git.Repo):
-    def __init__(self, path, url=None):
-        super(git_repo, self).__init__(path)
-        if '.git' not in os.listdir(path):
-            self.init(path)
-        try:
-            self.remote()
-        except:
-            print('creating remote add named "origin"!')
-            self.create_remote(name='origin', url=url)
-
-    def add_file(self, file_list, commit_msg=':'):
-        self.index.add(file_list)
-        self.index.commit(commit_msg)
-        self.remote().pull()
-        self.remote().push()
-
-    def remove_file(self, file_list, commit_msg=';'):
-        self.index.remove(file_list, working_tree=False)
-        self.index.commit(commit_msg)
-        self.remote().pull()
-        self.remote().push()
-
-    def untracked_files(self):
-        untracked_files = super(git_repo, self).untracked_files
-        print(untracked_files)
-        return untracked_files
-
-    def update_modified(self, commit_msg=';'):
-        self.git.add('-u')    # using git command sytanx directly
-        self.index.commit(commit_msg)
-        self.remote().pull()
-        self.remote().push()
-
-
-
+# local repository path
 local_repo_dir = r'C:\jupyter\car_palte_recogonition'
+# github repository url
 git_repo_url = r'https://github.com/liam800/car-license-plate-recognition'
 
-repo = git_repo(local_repo_dir, git_repo_url)
+def creat_repo(git_repo_url):
+    if '.git' not in os.listdir(local_repo_dir):
+        subprocess.call(['git', 'init'])
+        subprocess.call(['git', 'remote', 'add', 'origin', git_repo_url])
+
+def git_update(fileList, commit_msg='update for project'):
+    # git update
+    subprocess.call(['git', 'pull', 'origin', 'master'])
+    subprocess.call(['git', 'add', '-u'])
+    for file in fileList:
+        subprocess.call(['git', 'add', file])
+        subprocess.call(['git', 'commit', '-m', commit_msg])
+        subprocess.call(['git', 'push', 'origin', 'master'])
+        print('{} is updated'.format(file))
+
 # 获取需要上传的文件
-file_collection = os.listdir(local_repo_dir)
+fileList = os.listdir(local_repo_dir)
 for file in ['__pycache__', '.git']:
-    try:file_collection.remove(file)
+    try:fileList.remove(file)
     except:pass
-print(file_collection)
-repo.add_file(file_collection, commit_msg='update files for project')
-# repo.update_modified('update modification for this file')
-
-
-
+print(fileList)
+# update file
+git_update(fileList)
