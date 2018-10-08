@@ -1,8 +1,11 @@
 import git
+import os
 
 class git_repo(git.Repo):
     def __init__(self, path, url=None):
         super(git_repo, self).__init__(path)
+        if '.git' not in os.listdir(path):
+            self.init(path)
         try:
             self.remote()
         except:
@@ -38,8 +41,14 @@ local_repo_dir = r'C:\jupyter\car_palte_recogonition'
 git_repo_url = r'https://github.com/liam800/car-license-plate-recognition'
 
 repo = git_repo(local_repo_dir, git_repo_url)
-# repo.add_file(['git_python.py'], commit_msg='update files for project')
-repo.update_modified('update modification for this file')
+# 获取需要上传的文件
+file_collection = os.listdir(local_repo_dir)
+for file in ['__pycache__', '.git']:
+    try:file_collection.remove(file)
+    except:pass
+print(file_collection)
+repo.add_file(file_collection, commit_msg='update files for project')
+# repo.update_modified('update modification for this file')
 
 
 
