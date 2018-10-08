@@ -19,6 +19,7 @@ def git_update(fileList, commit_msg='update for project'):
         subprocess.call(['git', 'add', file])
         subprocess.call(['git', 'commit', '-m', commit_msg])
         subprocess.call(['git', 'push', 'origin', 'master'])
+        print('{} is updated'.format(file))
 
 # 获取需要上传的文件
 fileList = os.listdir(local_repo_dir)
