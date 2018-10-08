@@ -8,8 +8,8 @@ git_repo_url = r'https://github.com/liam800/car-license-plate-recognition'
 
 def creat_repo(git_repo_url):
     if '.git' not in os.listdir(local_repo_dir):
-        subprocess.check_call(['git', 'init'])
-        subprocess.check_call(['git', 'remote', 'add', 'origin', git_repo_url])
+        subprocess.call(['git', 'init'])
+        subprocess.call(['git', 'remote', 'add', 'origin', git_repo_url])
 
 def git_update(fileList, commit_msg='update for project'):
     # git update
